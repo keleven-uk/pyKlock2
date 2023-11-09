@@ -1,8 +1,8 @@
 ###############################################################################################################
-#    pyKlock2_utils   Copyright (C) <2022>  <Kevin Scott>                                                     #                                                                                          #                                                                                                             #
-#    Contains utility functions for pyDigitalKlock.py.                                                        #
+#    pyKlock2_utils   Copyright (C) <2023>  <Kevin Scott>                                                     #                                                                                          #                                                                                                             #
+#    Contains utility functions for pyKlock2.py.                                                              #
 #                                                                                                             #
-#     For changes see history.txt                                                                             #
+#    For changes see history.txt                                                                              #
 #                                                                                                             #
 ###############################################################################################################
 #                                                                                                             #

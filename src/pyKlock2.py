@@ -3,7 +3,7 @@
 #                                                                                                             #
 #    Uses and builds on the example https://github.com/panos-stavrianos/flet_timer                            #
 #                                                                                                             #
-#     For changes see history.txt                                                                             #
+#    For changes see history.txt                                                                              #
 #                                                                                                             #
 ###############################################################################################################
 #    Copyright (C) <2021-23>  <Kevin Scott>                                                                   #
@@ -21,49 +21,83 @@
 #                                                                                                             #
 ###############################################################################################################
 
-
 from datetime import datetime
 
 import flet as ft
+
+import src.selectTime as time
 
 import src.utils.klock_utils as utils
 
 
 class pyKlock2App(ft.UserControl):
+    """  A class that builds pyKlock2.
+         The class is called from main.py
 
-    def __init(page):
+         The page is passed in, so that the close button will work.
+    """
+
+    def __init(self, page):
         self.page = page
 
     def build(self):
 
-        self.txt_time  = ft.Text(size=100, color="pink600", value="None")
+        self.current_time   = time.SelectTime()         #  Object with the varied time codes.
+        self.time_type      = "Fuzzy Time"              #  GMT Time or Local Time
+
+        #  Create the widgets used.
+        self.txt_time  = ft.Text(size=28, color="pink600", value="None", text_align=ft.MainAxisAlignment.CENTER)
         self.dte_time  = ft.Text(size=10, color="pink600", value="Friday 26 October 2023")
         self.sts_time  = ft.Text(size=10, color="pink600", value="csN")
         self.idl_time  = ft.Text(size=10, color="pink600", value="Idle time: 1h32s")
-        self.close_btn = ft.ElevatedButton("CLOSE", on_click=lambda _:self.page.window_close())
-        self.open_btn  = ft.ElevatedButton("OPEN",  on_click=lambda _:self.show_menu())
+        self.chg_time  = ft.PopupMenuItem(icon=ft.icons.CHANGE_CIRCLE,
+                                          text="Fuzzy Time",
+                                          checked=True , on_click=lambda _:self.change_time())
+        self.btn_close = ft.PopupMenuItem(icon=ft.icons.CLOSE,
+                                          text="Close",
+                                          on_click=lambda _:self.page.window_close())
 
+
+        #  Create the pop up button and add the menu items.
+        self.pb = ft.PopupMenuButton(
+            items=[
+                self.chg_time,
+                ft.PopupMenuItem(),      #  Divider
+                self.btn_close
+            ]
+        )
+
+        #  Create the page layout.
         return ft.Column(
                     controls=[
                         ft.Row(
-                            controls=[
-                                ft.WindowDragArea(ft.Container(self.txt_time)),
-                                ft.Column(
-                                    [self.close_btn, self.open_btn]
-                                    )
+                            controls=[self.pb,ft.WindowDragArea(ft.Container(self.txt_time)),  #  Create the draggable area.
                                 ]
                         ),
                         ft.Row(
                             controls=[self.dte_time, self.sts_time, self.idl_time], alignment=ft.MainAxisAlignment.SPACE_BETWEEN
                         )
                     ],
-                    )
+                )
 
-    def show_menu(self):
-        print("show_menu")
+    def change_time(self):
+        """  Called from the pop up menu item chg_time.
+             Changes the displayed time between local time and fuzzy time.
+        """
+        if self.time_type == "Fuzzy Time":
+            self.time_type = "Local Time"
+            self.txt_time.size = 100
+            self.chg_time.checked = False
+        else:
+            self.time_type = "Fuzzy Time"
+            self.txt_time.size = 30
+            self.chg_time.checked = True
 
     def refresh(self):
-        self.txt_time.value = datetime.now().strftime("%H:%M:%S")
+        """  Called every second by the non-visual component timer [created in main.py]
+             Updated the time, date, key status and idle time.
+        """
+        self.txt_time.value = self.current_time.getTime(self.time_type)
         self.dte_time.value = datetime.now().strftime("%A %d %B %Y")
         self.sts_time.value = utils.get_state()
         self.idl_time.value = utils.get_idle_duration()
