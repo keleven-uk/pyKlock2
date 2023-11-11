@@ -31,17 +31,34 @@
 #                                                                                                             #
 ###############################################################################################################
 
+import platform
+
 import flet as ft
 from flet_timer.flet_timer import Timer
 
 from src.pyKlock2 import pyKlock2App
 
+import src.config as Config
+import src.logger as Logger
+
+from src.projectPaths import LOGGER_PATH, CONFIG_PATH
+
 ############################################################################################### __main__ ######
 
 if __name__ == "__main__":
 
+    my_logger  = Logger.get_logger(str(LOGGER_PATH))    # Create the logger.
+    my_config  = Config.Config(CONFIG_PATH, my_logger)  # Create the config.
+
+    my_logger.info("-" * 100)
+    my_logger.info(f"  Running {my_config.NAME} Version {my_config.VERSION} ")
+    my_logger.debug(f" {platform.uname()}")
+    my_logger.debug(f" Python Version {platform.python_version()}")
+    my_logger.debug("")
+
     def main(page: ft.Page):
-        page.title = "Flet Timer example"
+
+        page.title = "pyKlock2 [flet]"
 
         page.vertical_alignment   = ft.MainAxisAlignment.START
         page.horizontal_alignment = ft.CrossAxisAlignment.CENTER
@@ -55,13 +72,15 @@ if __name__ == "__main__":
         page.window_frameless = True
         page.window_opacity   = 1
 
-        page.window_height = 200
-        page.window_width  = 550
+        page.window_height = my_config.WIN_WIDTH
+        page.window_width  = my_config.WIN_WIDTH
+        page.window_left   = my_config.X_POS
+        page.window_top    = my_config.Y_POS
 
         page.update()
 
         # create application instance
-        pyKlock2 = pyKlock2App(page)
+        pyKlock2 = pyKlock2App(my_config)
 
         #  Create the non-visual component timer.
         timer = Timer(name="timer", interval_s=1, callback=pyKlock2.refresh)
@@ -70,5 +89,8 @@ if __name__ == "__main__":
         page.add(pyKlock2, timer)
 
 
-
     ft.app(target=main)
+
+
+    my_logger.info(f"  Ending {my_config.NAME} Version {my_config.VERSION} ")
+    my_logger.info("=" * 100)

@@ -37,8 +37,10 @@ class pyKlock2App(ft.UserControl):
          The page is passed in, so that the close button will work.
     """
 
-    def __init(self, page):
-        self.page = page
+    def __init__(self, my_config):
+        super().__init__()
+        self.my_config = my_config
+
 
     def build(self):
 
@@ -46,16 +48,17 @@ class pyKlock2App(ft.UserControl):
         self.time_type      = "Fuzzy Time"              #  GMT Time or Local Time
 
         #  Create the widgets used.
-        self.txt_time  = ft.Text(size=28, color="pink600", value="None", text_align=ft.MainAxisAlignment.CENTER)
+        self.txt_time  = ft.Text(size=28, color="pink600", value="None")
         self.dte_time  = ft.Text(size=10, color="pink600", value="Friday 26 October 2023")
         self.sts_time  = ft.Text(size=10, color="pink600", value="csN")
         self.idl_time  = ft.Text(size=10, color="pink600", value="Idle time: 1h32s")
         self.chg_time  = ft.PopupMenuItem(icon=ft.icons.CHANGE_CIRCLE,
                                           text="Fuzzy Time",
-                                          checked=True , on_click=lambda _:self.change_time())
+                                          checked=True,
+                                          on_click=lambda _:self.change_time())
         self.btn_close = ft.PopupMenuItem(icon=ft.icons.CLOSE,
                                           text="Close",
-                                          on_click=lambda _:self.page.window_close())
+                                          on_click=lambda _:self.close_page())
 
 
         #  Create the pop up button and add the menu items.
@@ -72,13 +75,15 @@ class pyKlock2App(ft.UserControl):
                     controls=[
                         ft.Row(
                             controls=[self.pb,ft.WindowDragArea(ft.Container(self.txt_time)),  #  Create the draggable area.
-                                ]
+                                ], alignment=ft.MainAxisAlignment.SPACE_BETWEEN
                         ),
                         ft.Row(
                             controls=[self.dte_time, self.sts_time, self.idl_time], alignment=ft.MainAxisAlignment.SPACE_BETWEEN
-                        )
+                        ),
                     ],
                 )
+
+
 
     def change_time(self):
         """  Called from the pop up menu item chg_time.
@@ -102,6 +107,15 @@ class pyKlock2App(ft.UserControl):
         self.sts_time.value = utils.get_state()
         self.idl_time.value = utils.get_idle_duration()
         self.update()
+
+    def close_page(self):
+        print(f"{self.page.window_left} :: {self.page.window_top}")
+        self.my_config.X_POS = self.page.window_left
+        self.my_config.Y_POS = self.page.window_top
+        self.my_config.writeConfig()
+
+        self.page.window_close()
+
 
 
 

@@ -1,8 +1,9 @@
 ###############################################################################################################
-#    history.txt   Copyright (C) <2023>  <Kevin Scott>                                                        #
+#    projectPaths.py   Copyright (C) <2023>  <Kevin Scott>                                                    #                                                                                                             #                                                                                                             #
+#    Holds common directory paths for the project.                                                            #
+#        Must sit in src directory                                                                            #
 #                                                                                                             #
-#    History file for pyKlock2                                                                                #
-#                                                                                                             #
+#     For changes see history.txt                                                                             #
 #                                                                                                             #
 ###############################################################################################################
 #    Copyright (C) <2023>  <Kevin Scott>                                                                      #
@@ -20,38 +21,18 @@
 #                                                                                                             #
 ###############################################################################################################
 
+"""  A place to hold all the common project paths.
+     Also, holds some common constants used in the project.
+"""
+import sys
+import pathlib
 
-V2023.3  [11 November 2023]
+PROJECT_PATH  = pathlib.Path(__file__).parent
+MAIN_PATH     = pathlib.Path(__file__).parent.parent
 
-    Added a config files, primarily to save the Klock screen position when closed.
-        The settings are saved in a config.toml file and read in Klock start.
-        If the file is missing, a default file is created.
-    Added a logger.  Only logs start and end of Klock at the moment.
-    Added a projectPaths file, this will hold the paths for the config and logger files.
-    Also, used flet pack to create a stand alone executable.
-
-
-V2023.2  [9 November 2023]
-
-    Added src.selectTime.py - The converts the time into different formats.
-    Added the ability to displayed in numbers [00:00:00] or in fuzzy time.
-        Fuzzy time is the time in words rounded to the nearest five minutes.
-        i.e  twenty past nine in the evening or quarter to six in the morning.
-    Added a popUpMenuButton, which gives a menu with close or fuzzy time options.
-        The close option closes Klock.
-        The fuzzy time option is clickable, if click display time as fuzzy time
-            if unclicked display time in numbers.
-    Added Klock should remain on top of other other windows.
-
-
-V2023.1  [1 November 2023]
-
-    pyKlock2 is Klock but in python and built in flet
-    This started with python 3.12 and flet 0.10.3.
-
-    Basic working example.
-    The app displays the time in the centre with a status bar type display at the bottom showing the
-        date, key status [Caps, Num and scroll lock] and PC idle time.
-    The GUI is help in a class [src.pyKlock2.py] and called from the main script [main.py].
-
-
+if getattr(sys, "frozen", False) and hasattr(sys, "_MEIPASS"):
+    CONFIG_PATH   = "config.toml"
+    LOGGER_PATH   = "pyKlock.log"
+else:
+     CONFIG_PATH   = MAIN_PATH / "config.toml"
+     LOGGER_PATH   = MAIN_PATH / "logs/pyKlock.log"
