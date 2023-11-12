@@ -44,8 +44,8 @@ class pyKlock2App(ft.UserControl):
 
     def build(self):
 
-        self.current_time   = time.SelectTime()         #  Object with the varied time codes.
-        self.time_type      = "Fuzzy Time"              #  GMT Time or Local Time
+        self.current_time   = time.SelectTime()             #  Object with the varied time codes.
+        self.time_type      = self.my_config.TIME_TYPE      #  GMT Time or Local Time
 
         #  Create the widgets used.
         self.txt_time  = ft.Text(size=28, color="pink600", value="None")
@@ -74,8 +74,21 @@ class pyKlock2App(ft.UserControl):
         return ft.Column(
                     controls=[
                         ft.Row(
-                            controls=[self.pb,ft.WindowDragArea(ft.Container(self.txt_time)),  #  Create the draggable area.
-                                ], alignment=ft.MainAxisAlignment.SPACE_BETWEEN
+                            [
+                                ft.Container(
+                                    content=self.pb,
+                                    alignment=ft.alignment.Alignment(-1, 1),
+                                    width=40,
+                                    height=self.my_config.WIN_HEIGHT-40,
+                                ),
+                                ft.Container(
+                                    content=ft.WindowDragArea(ft.Container(self.txt_time)),
+                                    alignment=ft.alignment.Alignment(0, 1),
+                                    width=self.my_config.WIN_WIDTH-40,
+                                    height=self.my_config.WIN_HEIGHT-40,
+                                ),
+                            ],
+                            alignment=ft.MainAxisAlignment.SPACE_BETWEEN,
                         ),
                         ft.Row(
                             controls=[self.dte_time, self.sts_time, self.idl_time], alignment=ft.MainAxisAlignment.SPACE_BETWEEN
@@ -91,7 +104,7 @@ class pyKlock2App(ft.UserControl):
         """
         if self.time_type == "Fuzzy Time":
             self.time_type = "Local Time"
-            self.txt_time.size = 100
+            self.txt_time.size = 120
             self.chg_time.checked = False
         else:
             self.time_type = "Fuzzy Time"
@@ -109,9 +122,11 @@ class pyKlock2App(ft.UserControl):
         self.update()
 
     def close_page(self):
-        print(f"{self.page.window_left} :: {self.page.window_top}")
-        self.my_config.X_POS = self.page.window_left
-        self.my_config.Y_POS = self.page.window_top
+        """  Saves Klcoks screen position and then closed Klock.
+        """
+        self.my_config.X_POS     = self.page.window_left
+        self.my_config.Y_POS     = self.page.window_top
+        self.my_config.TIME_TYPE = self.time_type
         self.my_config.writeConfig()
 
         self.page.window_close()

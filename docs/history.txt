@@ -20,6 +20,13 @@
 #                                                                                                             #
 ###############################################################################################################
 
+V2024.4  [12 November 2022]
+
+    The pop up menu button time text are now contained in their own container within a row.
+        The allows for fine grained alignments of each component.
+    Corrected descriptions in src.config.py.
+    Current time type is now loaded from config
+
 
 V2023.3  [11 November 2023]
 

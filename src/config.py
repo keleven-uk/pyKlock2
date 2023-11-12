@@ -72,61 +72,61 @@ class Config():
 
     @property
     def WIN_WIDTH(self):
-        """  Return the background colour.
+        """  Returns the window width.
         """
         return self.config["WINDOW"].get("width", "400")
 
     @WIN_WIDTH.setter
     def WIN_WIDTH(self, value):
-        """  Sets the background colour.
+        """  Sets the window width.
         """
         self.config["WINDOW"]["width"] = value
 
     @property
     def WIN_HEIGHT(self):
-        """  Return the background colour.
+        """  Returns the window height.
         """
         return self.config["WINDOW"].get("height", "150")
 
     @WIN_HEIGHT.setter
     def WIN_HEIGHT(self, value):
-        """  Sets the background colour.
+        """  Sets the window height.
         """
         self.config["WINDOW"]["height"] = value
 
     @property
     def X_POS(self):
-        """  Return the background colour.
+        """  Returns the X co-ordinate of the top right hand corner of the window.
         """
         return self.config["WINDOW"].get("x_pos", "0")
 
     @X_POS.setter
     def X_POS(self, value):
-        """  Sets the background colour.
+        """  Sets the X co-ordinate of the top right hand corner of the window.
         """
         self.config["WINDOW"]["x_pos"] = value
 
     @property
     def Y_POS(self):
-        """  Return the background colour.
+        """  Returns the Y co-ordinate of the top right hand corner of the window.
         """
         return self.config["WINDOW"].get("y_pos", "0")
 
     @Y_POS.setter
     def Y_POS(self, value):
-        """  Sets the background colour.
+        """  Sets the Y co-ordinate of the top right hand corner of the window.
         """
         self.config["WINDOW"]["y_pos"] = value
 
     @property
     def TIME_TYPE(self):
-        """  Return the background colour.
+        """  Return the type [format] of the displayed time.
         """
         return self.config["TIME"].get("type", "Fuzzy Time")
 
     @TIME_TYPE.setter
     def TIME_TYPE(self, value):
-        """  Sets the background colour.
+        """  Sets the type [format] of the displayed time.
         """
         self.config["TIME"]["type"] = value
 
@@ -156,7 +156,7 @@ class Config():
         written = strNow.strftime("%A %d %B %Y  %H:%M:%S")
         config  = dict()
 
-        config["INFO"] = {"myVERSION": "2023.3",
+        config["INFO"] = {"myVERSION": "2023.4",
                           "myNAME"   : "pyKlock"}
 
         config["COLOUR"] = {"foreground" : "#ffffff",

@@ -1,10 +1,10 @@
-#   Configure file for pyKlock.py 
-#   (c) Kevin Scott   Written Saturday 11 November 2023  21:28:41
+#   Configure file for pyKlock.py
+#   (c) Kevin Scott   Written Sunday 12 November 2023  16:27:34
 #
-#   true and false are lower case 
+#   true and false are lower case
 #
 [INFO]
-myVERSION = "2023.3"
+myVERSION = "2023.4"
 myNAME = "pyKlock"
 
 [COLOUR]
@@ -15,8 +15,8 @@ transparent = "true"
 [WINDOW]
 width = 550
 height = 200
-x_pos = 1165.0
-y_pos = -372.0
+x_pos = 1070.0
+y_pos = -363.0
 
 [TIME]
-type = "Fuzzy Time"
+type = "Local Time"

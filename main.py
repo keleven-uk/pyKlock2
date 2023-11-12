@@ -56,6 +56,9 @@ if __name__ == "__main__":
     my_logger.debug(f" Python Version {platform.python_version()}")
     my_logger.debug("")
 
+    my_logger.info(f" Config path {CONFIG_PATH}")
+    my_logger.info(f" Logger path {LOGGER_PATH}")
+
     def main(page: ft.Page):
 
         page.title = "pyKlock2 [flet]"
@@ -66,13 +69,13 @@ if __name__ == "__main__":
         page.window_title_bar_buttons_hidden = True
         page.window_title_bar_hidden         = True
         page.window_always_on_top            = True
+        page.window_frameless                = False
 
         page.window_bgcolor   = ft.colors.TRANSPARENT
         page.bgcolor          = ft.colors.TRANSPARENT
-        page.window_frameless = True
         page.window_opacity   = 1
 
-        page.window_height = my_config.WIN_WIDTH
+        page.window_height = my_config.WIN_HEIGHT
         page.window_width  = my_config.WIN_WIDTH
         page.window_left   = my_config.X_POS
         page.window_top    = my_config.Y_POS
