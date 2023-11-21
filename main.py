@@ -1,6 +1,5 @@
 ###############################################################################################################
 #    pyKlock2   Copyright (C) <2023>  <Kevin Scott>                                                           #
-#    A mini klock built using flet [Flutter].                                                                 #
 #                                                                                                             #
 #    The Klock displays the time [local], date, key status  and the computers idle time.                      #
 #       Key status is the status of Caps Lock, Scroll lock and Num lock.                                      #
@@ -16,7 +15,6 @@
 #                                                                                                             #
 #    For changes see history.txt                                                                              #
 ###############################################################################################################
-#    Copyright (C) <2021-23>  <Kevin Scott>                                                                   #
 #                                                                                                             #
 #    This program is free software: you can redistribute it and/or modify it under the terms of the           #
 #    GNU General Public License as published by the Free Software Foundation, either Version 3 of the         #
@@ -48,16 +46,18 @@ from src.projectPaths import LOGGER_PATH, CONFIG_PATH
 if __name__ == "__main__":
 
     my_logger  = Logger.get_logger(str(LOGGER_PATH))    # Create the logger.
-    my_config  = Config.Config(CONFIG_PATH, my_logger)  # Create the config.
 
     my_logger.info("-" * 100)
+
+    my_config  = Config.Config(CONFIG_PATH, my_logger)  # Create the config.
+
     my_logger.info(f"  Running {my_config.NAME} Version {my_config.VERSION} ")
     my_logger.debug(f" {platform.uname()}")
     my_logger.debug(f" Python Version {platform.python_version()}")
     my_logger.debug("")
 
-    my_logger.info(f" Config path {CONFIG_PATH}")
-    my_logger.info(f" Logger path {LOGGER_PATH}")
+    my_logger.info(f"  Config path {CONFIG_PATH}")
+    my_logger.info(f"  Logger path {LOGGER_PATH}")
 
     def main(page: ft.Page):
 
@@ -65,15 +65,20 @@ if __name__ == "__main__":
 
         page.vertical_alignment   = ft.MainAxisAlignment.START
         page.horizontal_alignment = ft.CrossAxisAlignment.CENTER
+        page.window_always_on_top = True
 
-        page.window_title_bar_buttons_hidden = True
-        page.window_title_bar_hidden         = True
-        page.window_always_on_top            = True
-        page.window_frameless                = False
-
-        page.window_bgcolor   = ft.colors.TRANSPARENT
-        page.bgcolor          = ft.colors.TRANSPARENT
-        page.window_opacity   = 1
+        if my_config.TRANSPARENT:
+            page.window_title_bar_buttons_hidden = True
+            page.window_title_bar_hidden         = True
+            page.window_frameless                = True
+            page.window_opacity                  = 1
+            page.window_bgcolor                  = ft.colors.TRANSPARENT
+            page.bgcolor                         = ft.colors.TRANSPARENT
+            page.fgcolor                         = my_config.FOREGROUND
+        else:
+            page.window_bgcolor                  = my_config.BACKGROUND
+            page.bgcolor                         = my_config.BACKGROUND
+            page.fgcolor                         = my_config.FOREGROUND
 
         page.window_height = my_config.WIN_HEIGHT
         page.window_width  = my_config.WIN_WIDTH

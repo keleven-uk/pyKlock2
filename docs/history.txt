@@ -5,7 +5,6 @@
 #                                                                                                             #
 #                                                                                                             #
 ###############################################################################################################
-#    Copyright (C) <2023>  <Kevin Scott>                                                                      #
 #                                                                                                             #
 #    This program is free software: you can redistribute it and/or modify it under the terms of the           #
 #    GNU General Public License as published by the Free Software Foundation, either Version 3 of the         #
@@ -20,7 +19,17 @@
 #                                                                                                             #
 ###############################################################################################################
 
-V2024.4  [12 November 2022]
+V2023.5  [21 November 2023]
+
+    Using python 3.12 and flet 0.12.2.
+    Added a build bat, which uses flet pack to produce a stand alone executable.
+    Added a resource directory, only holds the icon used for above, at the moment.
+    Added properties for foreground, background colour and transparency.
+        Also, added the ability to load and save these and program start / end.
+        Only the transparency can currently be changes at run time.
+
+
+V2023.4  [12 November 2022]
 
     The pop up menu button time text are now contained in their own container within a row.
         The allows for fine grained alignments of each component.
@@ -30,10 +39,10 @@ V2024.4  [12 November 2022]
 
 V2023.3  [11 November 2023]
 
-    Added a config files, primarily to save the Klock screen position when closed.
-        The settings are saved in a config.toml file and read in Klock start.
+    Added a config files, primarily to save the pyKlock2 screen position when closed.
+        The settings are saved in a config.toml file and read in pyKlock2 start.
         If the file is missing, a default file is created.
-    Added a logger.  Only logs start and end of Klock at the moment.
+    Added a logger.  Only logs start and end of pyKlock2 at the moment.
     Added a projectPaths file, this will hold the paths for the config and logger files.
     Also, used flet pack to create a stand alone executable.
 
@@ -45,15 +54,15 @@ V2023.2  [9 November 2023]
         Fuzzy time is the time in words rounded to the nearest five minutes.
         i.e  twenty past nine in the evening or quarter to six in the morning.
     Added a popUpMenuButton, which gives a menu with close or fuzzy time options.
-        The close option closes Klock.
+        The close option closes pyKlock2.
         The fuzzy time option is clickable, if click display time as fuzzy time
             if unclicked display time in numbers.
-    Added Klock should remain on top of other other windows.
+    Added pyKlock2 should remain on top of other other windows.
 
 
 V2023.1  [1 November 2023]
 
-    pyKlock2 is Klock but in python and built in flet
+    pyKlock2 is pyKlock but in python and built in flet
     This started with python 3.12 and flet 0.10.3.
 
     Basic working example.

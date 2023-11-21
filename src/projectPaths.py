@@ -6,7 +6,6 @@
 #     For changes see history.txt                                                                             #
 #                                                                                                             #
 ###############################################################################################################
-#    Copyright (C) <2023>  <Kevin Scott>                                                                      #
 #                                                                                                             #
 #    This program is free software: you can redistribute it and/or modify it under the terms of the           #
 #    GNU General Public License as published by the Free Software Foundation, either Version 3 of the         #
@@ -30,7 +29,7 @@ import pathlib
 PROJECT_PATH  = pathlib.Path(__file__).parent
 MAIN_PATH     = pathlib.Path(__file__).parent.parent
 
-if getattr(sys, "frozen", False) and hasattr(sys, "_MEIPASS"):
+if getattr(sys, "frozen", False) and hasattr(sys, "_MEIPASS"):   #  Running as a stand alone executable.
     CONFIG_PATH   = "config.toml"
     LOGGER_PATH   = "pyKlock.log"
 else:

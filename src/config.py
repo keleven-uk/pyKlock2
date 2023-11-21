@@ -1,5 +1,5 @@
 ###############################################################################################################
-#    myConfig.py    Copyright (C) <2020-2021>  <Kevin Scott>                                                  #
+#    myConfig.py    Copyright (C) <2023>  <Kevin Scott>                                                       #
 #                                                                                                             #
 #    A class that acts has a wrapper around the configure file - config.toml.                                 #
 #    The configure file is first read, then the properties are made available.                                #
@@ -69,6 +69,42 @@ class Config():
         """  Returns the application Version.
         """
         return self.config["INFO"]["myVERSION"]
+
+    @property
+    def FOREGROUND(self):
+        """  Returns the window foreground colour.
+        """
+        return self.config["COLOUR"].get("foreground", "#ffffff")
+
+    @FOREGROUND.setter
+    def FOREGROUND(self, value):
+        """  Sets the window foreground colour.
+        """
+        self.config["COLOUR"]["foreground"] = value
+
+    @property
+    def BACKGROUND(self):
+        """  Returns the window background colour.
+        """
+        return self.config["COLOUR"].get("background", "400")
+
+    @BACKGROUND.setter
+    def BACKGROUND(self, value):
+        """  Sets the window background colour.
+        """
+        self.config["COLOUR"]["background"] = value
+
+    @property
+    def TRANSPARENT(self):
+        """  Returns the window transparent.
+        """
+        return self.config["COLOUR"].get("transparent", True)
+
+    @TRANSPARENT.setter
+    def TRANSPARENT(self, value):
+        """  Sets the window transparent.
+        """
+        self.config["COLOUR"]["transparent"] = value
 
     @property
     def WIN_WIDTH(self):
@@ -156,12 +192,12 @@ class Config():
         written = strNow.strftime("%A %d %B %Y  %H:%M:%S")
         config  = dict()
 
-        config["INFO"] = {"myVERSION": "2023.4",
+        config["INFO"] = {"myVERSION": "2023.5",
                           "myNAME"   : "pyKlock"}
 
         config["COLOUR"] = {"foreground" : "#ffffff",
                             "background" : "#80ff80",
-                            "transparent": "true"}
+                            "transparent": True}
 
         config["WINDOW"] = {"width" :550,
                             "height":200,
