@@ -19,6 +19,18 @@
 #                                                                                                             #
 ###############################################################################################################
 
+
+V2023.6  [30 November 2023]
+
+    Using python 3.12 and flet 0.14.0.
+    Added a colour picker - which is a modified alert dialog - src.colouorPicker.py.
+        Heavily influenced by https://www.darkartistry.com/flet-color-picker-dialog-class/
+        The foreground and background colours can be chosen - needs more testing.
+        The colour names and hex values are held in projectPaths.py
+        The switching of transparency mode not yet implemented.
+        The colouorPicker is selected from the Klock popup menu.
+
+
 V2023.5  [21 November 2023]
 
     Using python 3.12 and flet 0.12.2.

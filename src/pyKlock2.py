@@ -25,9 +25,7 @@ from datetime import datetime
 import flet as ft
 
 import src.selectTime as time
-
 import src.utils.klock_utils as utils
-
 
 class pyKlock2App(ft.UserControl):
     """  A class that builds pyKlock2.
@@ -36,9 +34,10 @@ class pyKlock2App(ft.UserControl):
          The page is passed in, so that the close button will work.
     """
 
-    def __init__(self, my_config):
+    def __init__(self, my_config, colourPicker):
         super().__init__()
         self.my_config = my_config
+        self.colourPicker = colourPicker
 
 
     def build(self):
@@ -55,6 +54,9 @@ class pyKlock2App(ft.UserControl):
                                           text="Fuzzy Time",
                                           checked=True,
                                           on_click=lambda _:self.change_time())
+        self.pck_clr   = ft.PopupMenuItem(icon=ft.icons.COLORIZE,
+                                          text="Pick Colour",
+                                          on_click=self.colourPicker.openDlgModal)
         self.btn_close = ft.PopupMenuItem(icon=ft.icons.CLOSE,
                                           text="Close",
                                           on_click=lambda _:self.close_page())
@@ -64,6 +66,7 @@ class pyKlock2App(ft.UserControl):
         self.pb = ft.PopupMenuButton(
             items=[
                 self.chg_time,
+                self.pck_clr,
                 ft.PopupMenuItem(),      #  Divider
                 self.btn_close
             ]
@@ -115,9 +118,18 @@ class pyKlock2App(ft.UserControl):
              Updated the time, date, key status and idle time.
         """
         self.txt_time.value = self.current_time.getTime(self.time_type)
+        self.txt_time.color = self.my_config.FOREGROUND
         self.dte_time.value = datetime.now().strftime("%A %d %B %Y")
+        self.dte_time.color = self.my_config.FOREGROUND
         self.sts_time.value = utils.get_state()
+        self.sts_time.color = self.my_config.FOREGROUND
         self.idl_time.value = utils.get_idle_duration()
+        self.idl_time.color = self.my_config.FOREGROUND
+
+        if self.my_config.TRANSPARENT:
+            pass
+        else:
+            self.page.bgcolor   = self.my_config.BACKGROUND
         self.update()
 
     def close_page(self):

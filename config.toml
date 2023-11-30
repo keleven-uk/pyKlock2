@@ -1,22 +1,22 @@
 #   Configure file for pyKlock.py
-#   (c) Kevin Scott   Written Tuesday 21 November 2023  21:51:15
+#   (c) Kevin Scott   Written Thursday 30 November 2023  21:48:32
 #
 #   true and false are lower case
 #
 [INFO]
-myVERSION = "2023.5"
+myVERSION = "2023.6"
 myNAME = "pyKlock"
 
 [COLOUR]
-foreground = "#ffffff"
-background = "#80ff80"
+foreground = "#FFFF00"
+background = "#8A2BE2"
 transparent = true
 
 [WINDOW]
 width = 550
-height = 200
-x_pos = 1184.0
-y_pos = -436.0
+height = 600
+x_pos = 1177.0
+y_pos = -686.0
 
 [TIME]
 type = "Fuzzy Time"

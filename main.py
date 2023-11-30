@@ -39,6 +39,7 @@ from src.pyKlock2 import pyKlock2App
 import src.config as Config
 import src.logger as Logger
 
+from src.colourPicker import ColourPicker
 from src.projectPaths import LOGGER_PATH, CONFIG_PATH
 
 ############################################################################################### __main__ ######
@@ -87,8 +88,11 @@ if __name__ == "__main__":
 
         page.update()
 
+        # Instantiate the colour picker.
+        colourPicker = ColourPicker(page, my_config)
+
         # create application instance
-        pyKlock2 = pyKlock2App(my_config)
+        pyKlock2 = pyKlock2App(my_config, colourPicker)
 
         #  Create the non-visual component timer.
         timer = Timer(name="timer", interval_s=1, callback=pyKlock2.refresh)
