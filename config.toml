@@ -1,14 +1,14 @@
 #   Configure file for pyKlock.py
-#   (c) Kevin Scott   Written Thursday 30 November 2023  21:48:32
+#   (c) Kevin Scott   Written Sunday 10 December 2023  21:30:57
 #
 #   true and false are lower case
 #
 [INFO]
-myVERSION = "2023.6"
+myVERSION = "2023.8.beta"
 myNAME = "pyKlock"
 
 [COLOUR]
-foreground = "#FFFF00"
+foreground = "#8A2BE2"
 background = "#8A2BE2"
 transparent = true
 

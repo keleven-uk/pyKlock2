@@ -20,6 +20,14 @@
 ###############################################################################################################
 
 
+V2023.7  [10 December 2023]
+
+    Created a new branch twoViews.
+    Their is a problem with using colour picker as a alert dialog, the main screen has to be a required
+    size to hold the alert.  Their could be a solution using views, the views can be of different sizes.
+    The file twoPage.py is a working template to modify.
+
+
 V2023.6  [30 November 2023]
 
     Using python 3.12 and flet 0.14.0.

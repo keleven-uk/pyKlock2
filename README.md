@@ -21,4 +21,4 @@ To install dependencies pip install -r requirements.txt
 For changes see history.txt
 
 
-Kevin Scott (C) 2023 :: pyKlock2 V2023.5
+Kevin Scott (C) 2023 :: pyKlock2 V2023.8

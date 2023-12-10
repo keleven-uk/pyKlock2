@@ -192,7 +192,7 @@ class Config():
         written = strNow.strftime("%A %d %B %Y  %H:%M:%S")
         config  = dict()
 
-        config["INFO"] = {"myVERSION": "2023.6",
+        config["INFO"] = {"myVERSION": "2023.8.beta",
                           "myNAME"   : "pyKlock"}
 
         config["COLOUR"] = {"foreground" : "#ffffff",
